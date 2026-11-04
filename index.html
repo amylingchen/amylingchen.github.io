@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lingling Chen — robotics researcher working on reliable vision-language-action models, embodied AI, and robot learning.">
+  <title>Lingling Chen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro" id="home">
+      <img class="profile-image" src="assets/profile.png" alt="Lingling Chen">
+      <div class="intro-copy">
+        <h1>Lingling Chen</h1>
+        <a class="email" href="mailto:dal340973@utdallas.edu">dal340973@utdallas.edu</a>
+        <p>I am Lingling Chen, a Ph.D. student in Computer Science at The University of Texas at Dallas, where I am advised by Prof. <a href="https://profiles.utdallas.edu/william.beksi" target="_blank" rel="noreferrer">William J. Beksi</a> in the PRIS Lab. I received my M.S. in Computer Science from The University of Texas at Arlington.</p>
+        <p>My research focuses on embodied intelligence, particularly on improving the safety and generalization of vision-language-action (VLA) models for robotic manipulation. My current work studies uncertainty in VLA-based control and object-centric reasoning for understanding objects and their relationships. I am interested in further exploring how robots can reason and generalize in real-world environments, as well as how agent-based planning and reasoning can be integrated with VLA models for deployment on physical robots.</p>
+        <p class="links"><a href="https://github.com/amylingchen" target="_blank" rel="noreferrer">GitHub</a></p>
+      </div>
+    </section>
+
+    <section id="research">
+      <h2>Research</h2>
+      <article class="item">
+        <img class="item-image" src="assets/sentryvla-overview.png" alt="Overview of the SentryVLA framework" style="height:auto;object-fit:contain;background:#fff">
+        <div class="item-copy">
+          <h3><a href="https://robotic-vision-lab.github.io/sentryvla/" target="_blank" rel="noreferrer">SentryVLA: Uncertainty-Guided Action Selection and State Monitoring for Vision-Language-Action Robotic Control</a></h3>
+          <p class="authors">Zongyao Lyu, <strong>Lingling Chen</strong>, William J. Beksi</p>
+          <p class="venue">Accepted at the 10th Conference on Robot Learning (CoRL), 2026</p>
+          <p><a class="project-link" href="https://robotic-vision-lab.github.io/sentryvla/" target="_blank" rel="noreferrer">[Project Page]</a> <a class="project-link" href="https://arxiv.org/html/2604.16677v2" target="_blank" rel="noreferrer">[arXiv]</a></p>
+          <p>A lightweight runtime reliability wrapper for frozen VLA policies. SentryVLA uses conformalized quantile regression to rank stochastic action candidates by their calibrated deviation from expert-like behavior, while a Mahalanobis-distance monitor detects abnormal execution contexts from the policy's latent state. It improves action selection and provides runtime warning signals without retraining or modifying the underlying VLA.</p>
+        </div>
+      </article>
+
+      <article class="item">
+        <img class="item-image" src="assets/rigorvla-overview.png" alt="Overview of the RIGOR-VLA architecture" style="height:auto;object-fit:contain;background:#fff">
+        <div class="item-copy">
+          <h3>RIGOR-VLA: Object-Centric Role Grounding with Relation-Aware Target Selection for Vision-Language-Action Models</h3>
+          <p class="authors"><strong>Lingling Chen</strong>, Zongyao Lyu, William J. Beksi</p>
+          <p class="venue">Under review</p>
+          <p>RIGOR-VLA addresses a failure mode in which VLA policies follow familiar layouts or trajectories without grounding an instruction to the intended physical instance. It builds instance-aligned object slots, explicitly assigns agent, target, and goal roles, and uses relation-aware geometric reasoning when multiple objects share the same noun. The accompanying LIBERO-RIGOR benchmark evaluates seen, unseen, and counterfactual layouts, where the method improves instruction-sensitive target selection and reduces wrong-object failures.</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <article class="item">
+        <img class="item-image" src="assets/waves-workcell.png" alt="Interactive 3D view of the WAVES robotic workcell with a UR5e arm, assembly board, and peg" style="height:auto;object-fit:contain;background:#f5f6f3">
+        <div class="item-copy">
+          <h3><a href="https://robotic-vision-lab.github.io/waves-workcell/" target="_blank" rel="noreferrer">waves-workcell</a></h3>
+          <p>A real-world UR5e assembly system that localizes 3D-printed parts, grasps and transports them, and performs tight-tolerance insertion. The system combines simulation-trained PPO skills, a π0.5 VLA policy fine-tuned on demonstrations, calibrated multi-camera perception, and a planning layer for skill sequencing and failure recovery.</p>
+          <p>The final π0.5 model achieves a 76.7% success rate (46/60 episodes) in closed-loop simulation evaluation.</p>
+          <p class="tags">UR5e · Reinforcement Learning · π0.5 · Sim-to-Real · Robotic Assembly</p>
+          <p><a class="project-link" href="https://robotic-vision-lab.github.io/waves-workcell/" target="_blank" rel="noreferrer">[Interactive 3D]</a> <a class="project-link" href="sim-evaluate/index.html">[Sim Evaluate]</a></p>
+        </div>
+      </article>
+
+      <article class="item">
+        <div class="item-image demo-preview" aria-hidden="true">
+          <div class="workspace-grid"></div>
+          <span class="object one">A</span><span class="object two">B</span>
+          <svg viewBox="0 0 420 220"><path d="M55 165 C120 80 205 185 360 58"/><circle cx="55" cy="165" r="5"/><circle cx="360" cy="58" r="5"/></svg>
+        </div>
+        <div class="item-copy">
+          <h3><a href="https://github.com/amylingchen/demogen_libero" target="_blank" rel="noreferrer">demogen_libero</a></h3>
+          <p>Data-generation infrastructure for training and evaluating RIGOR-VLA on the LIBERO-RIGOR benchmark. It segments source demonstrations into approach, grasp, transport, and placement phases; retargets coarse motions to new object layouts while preserving contact-sensitive manipulation; replays each trajectory in LIBERO with success filtering; and records object-centric RGB-D, segmentation, pose, annotation, and bounding-box data. The generated demonstrations support controlled seen, unseen, and counterfactual evaluation of language-to-instance grounding.</p>
+          <p class="tags">Python · LIBERO-RIGOR · MuJoCo · Data Generation · Object-Centric Learning</p>
+          <p><a class="project-link" href="https://github.com/amylingchen/demogen_libero" target="_blank" rel="noreferrer">[GitHub]</a></p>
+        </div>
+      </article>
+
+      <article class="item compact">
+        <img class="item-image" src="assets/easyparking-demo.gif" alt="Animated EasyParking demonstration showing parking availability and camera-based vehicle detection" style="height:auto;object-fit:contain;background:#000">
+        <div class="item-copy">
+          <h3><a href="https://github.com/amylingchen/EasyParking" target="_blank" rel="noreferrer">EasyParking</a></h3>
+          <p>A computer-vision parking occupancy system that processes camera images with YOLOv8 to determine whether each parking space is occupied. It stores availability in a database and presents parking-lot occupancy and individual open spaces through a mobile-friendly web interface.</p>
+          <p class="tags">Python · YOLOv8 · OpenCV · MySQL · Web Application</p>
+          <p><a class="project-link" href="https://github.com/amylingchen/EasyParking" target="_blank" rel="noreferrer">[GitHub]</a></p>
+        </div>
+      </article>
+
+      <article class="item compact">
+        <img class="item-image" src="assets/mediapipe-lstm-gesture-recognition.png" alt="MediaPipe and LSTM pipeline for real-time dynamic hand gesture recognition and computer control" style="height:auto;object-fit:contain;background:#000">
+        <div class="item-copy">
+          <h3><a href="https://github.com/amylingchen/hand_gesture_control_computer" target="_blank" rel="noreferrer">Real-Time Hand Gesture Control System</a></h3>
+          <p>A webcam-based interaction pipeline using MediaPipe keypoints and an LSTM model for temporal gesture recognition, reaching approximately 82% accuracy at 15 FPS.</p>
+          <p class="tags">Python · MediaPipe · LSTM · OpenCV</p>
+          <p><a class="project-link" href="https://github.com/amylingchen/hand_gesture_control_computer" target="_blank" rel="noreferrer">[GitHub]</a></p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>© 2026 Lingling Chen</footer>
+</body>
+</html>

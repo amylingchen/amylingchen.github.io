@@ -1,0 +1,260 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>FMB 装配项目说明</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;800&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: single reading column, wide tables scroll in place; section heads carry a machined "station" tag */
+:root {
+  --bg: #f5f6f7;
+  --paper: #ffffff;
+  --ink: #1b2228;
+  --muted: #5b6670;
+  --rule: #d8dde2;
+  --accent: #0b7a75;
+  --accent-soft: #e2f1ef;
+  --warn: #b25e09;
+  --warn-soft: #fbefe1;
+  --good: #2c7a3c;
+  --f-display: "Noto Serif SC", "Songti SC", serif;
+  --f-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12171b; --paper: #192026; --ink: #e4e9ed; --muted: #97a3ad; --rule: #2c363e;
+    --accent: #4fc2b9; --accent-soft: #17312f; --warn: #e3a25a; --warn-soft: #33261a; --good: #6cc27c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12171b; --paper: #192026; --ink: #e4e9ed; --muted: #97a3ad; --rule: #2c363e;
+  --accent: #4fc2b9; --accent-soft: #17312f; --warn: #e3a25a; --warn-soft: #33261a; --good: #6cc27c;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 15.5px; line-height: 1.75;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 72px;
+}
+.wrap { max-width: 860px; margin: 0 auto; display: grid; gap: 44px; }
+header { display: grid; gap: 14px; border-bottom: 2px solid var(--ink); padding-bottom: 26px; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+h1 { font-family: var(--f-display); font-weight: 800; font-size: clamp(30px, 5vw, 42px); line-height: 1.25; margin: 0; text-wrap: balance; }
+.lede { font-size: 17px; max-width: 42em; margin: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; color: var(--muted); }
+.meta b { color: var(--ink); font-weight: 500; }
+
+section { display: grid; gap: 16px; }
+.sh { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.tag { font-family: var(--f-mono); font-size: 12px; font-weight: 600; color: var(--accent); border: 1px solid var(--accent); border-radius: 3px; padding: 0 6px; line-height: 20px; }
+h2 { font-family: var(--f-display); font-weight: 600; font-size: 23px; margin: 0; text-wrap: balance; }
+h3 { font-size: 16.5px; font-weight: 700; margin: 0; }
+p { margin: 0; max-width: 46em; }
+ul { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; max-width: 46em; }
+.muted { color: var(--muted); }
+code, .mono { font-family: var(--f-mono); font-size: .86em; }
+.num { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+.tbl { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); }
+table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 14px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: .04em; background: var(--bg); }
+tr:last-child td { border-bottom: 0; }
+td.r { text-align: right; font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.hi { color: var(--accent); font-weight: 600; }
+
+.flow { display: flex; flex-wrap: wrap; gap: 6px; align-items: stretch; }
+.stage { flex: 1 1 130px; min-width: 0; background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 10px 12px; display: grid; gap: 2px; align-content: start; }
+.stage b { font-size: 14px; }
+.stage span { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+.arrow { align-self: center; color: var(--muted); font-family: var(--f-mono); }
+
+.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.principle { border-top: 2px solid var(--accent); padding-top: 8px; display: grid; gap: 4px; }
+.principle p { font-size: 14px; color: var(--muted); }
+
+.line { display: grid; gap: 10px; padding: 18px 20px; background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; }
+.line .k { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.status { font-size: 12px; padding: 0 8px; border-radius: 999px; line-height: 20px; white-space: nowrap; }
+.s-ok { background: var(--accent-soft); color: var(--accent); }
+.s-open { background: var(--warn-soft); color: var(--warn); }
+
+.tl { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; max-width: none; border-left: 2px solid var(--rule); }
+.tl li { display: grid; grid-template-columns: 74px 1fr; gap: 12px; padding: 6px 0 6px 16px; position: relative; }
+.tl li::before { content: ""; position: absolute; left: -6px; top: 15px; width: 10px; height: 10px; border-radius: 50%; background: var(--paper); border: 2px solid var(--accent); }
+.tl time { font-family: var(--f-mono); font-size: 13px; color: var(--muted); padding-top: 2px; }
+
+.issues { display: grid; gap: 10px; }
+.issue { display: grid; grid-template-columns: 4px 1fr; gap: 14px; }
+.issue::before { content: ""; background: var(--warn); border-radius: 2px; }
+.issue div { display: grid; gap: 2px; }
+.issue p { font-size: 14px; color: var(--muted); }
+
+ol.next { margin: 0; padding-left: 1.4em; display: grid; gap: 6px; max-width: 46em; }
+footer { font-size: 12.5px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; }
+@media (max-width: 520px) { .arrow { display: none; } .tl li { grid-template-columns: 1fr; gap: 0; } }
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">FMB · UR5e peg-in-hole · 项目说明</div>
+  <h1>FMB 装配项目：抓取与插入</h1>
+  <p class="lede">让一台 UR5e（Robotiq 2F-85 夹爪）在真实工作台上找到 3D 打印的零件（peg），把它抓起、搬到装配板前并插进对应的孔。整个流程分三层：仿真里训练的强化学习（RL）策略、用真实示教微调的 π0.5 视觉-语言-动作模型（VLA），以及负责选技能、处理失败的规划层。</p>
+  <div class="meta">
+    <span>时间范围 <b class="num">2026-10-06 – 11-03</b></span>
+    <span>主线物体 <b>长方体 rect</b>，其次六角 hexagon</span>
+    <span>目标 <b>完整任务成功率 &gt; 92%</b>（含延迟、噪声和场景变化）</span>
+  </div>
+</header>
+
+<section>
+  <div class="sh"><span class="tag">任务</span><h2>要完成什么</h2></div>
+  <p>一个回合从机械臂伸手开始，依次完成：<b>抓取 → 搬运 → 插入 → 张开夹爪 → 抬手</b>。peg 可以放在桌面任意位置、任意角度，可以立着也可以躺着；装配板的位置和朝向也不固定，需要靠相机实时估计。孔和 peg 的间隙大约每边 1.2–1.5 mm，所以抓取是否居中、手中零件的姿态是否准确，直接决定能不能插进去。</p>
+</section>
+
+<section>
+  <div class="sh"><span class="tag">硬件</span><h2>设备与分工</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>设备</th><th>配置</th><th>在项目里做什么</th></tr></thead>
+    <tbody>
+      <tr><td>UR5e + 2F-85</td><td>六轴机械臂 + 平行夹爪</td><td>执行；控制器限速设为 100%</td></tr>
+      <tr><td>NUC</td><td>CPU 主机</td><td>机械臂驱动（同一时间只允许一个驱动连接）、相机、状态机/规划、RL 小网络推理、安全层</td></tr>
+      <tr><td>GPU box</td><td>RTX 5060 Ti 16 GB + GTX 1080 8 GB</td><td>部署时跑 π0.5 推理和感知；不跑仿真</td></tr>
+      <tr><td>bender</td><td>2 × 96 GB Blackwell</td><td>主力训练：仿真、RL、数据合成、π0.5 LoRA 微调</td></tr>
+      <tr><td>Juno（UTD 集群）</td><td>Slurm，H100 / H200</td><td>RL 长时间训练的备选算力</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tbl"><table>
+    <thead><tr><th>相机</th><th>位置</th><th>用途与状态</th></tr></thead>
+    <tbody>
+      <tr><td>D455</td><td>侧面固定</td><td>全局视角，给 peg 的粗位置</td></tr>
+      <tr><td>L515（腕部）</td><td>手腕，安装时翻转 180°</td><td>俯视看 peg 和装配板，给精确位置与朝向；手眼标定 10-29 复查通过</td></tr>
+      <tr><td>L515（左侧）</td><td>桌子左侧固定</td><td>第二视角；只能用 USB 2</td></tr>
+      <tr><td>D405</td><td>原腕部相机</td><td>10-19 损坏，已由 L515 替代</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="sh"><span class="tag">架构</span><h2>部署时的分层</h2></div>
+  <div class="flow" role="img" aria-label="感知层到 UR5e 的数据流">
+    <div class="stage"><b>感知</b><span>形状、立/躺、peg 6D 位姿、板位姿（AprilTag）</span></div>
+    <div class="arrow">→</div>
+    <div class="stage"><b>规划 / 状态机</b><span>选技能链、给参数和时间预算、失败恢复</span></div>
+    <div class="arrow">→</div>
+    <div class="stage"><b>技能</b><span>RL 闭环策略、π0.5、分段脚本动作</span></div>
+    <div class="arrow">→</div>
+    <div class="stage"><b>安全层</b><span>工作区、力、速度限制，急停</span></div>
+    <div class="arrow">→</div>
+    <div class="stage"><b>UR5e</b><span>NUC 上的唯一驱动</span></div>
+  </div>
+  <div class="principles">
+    <div class="principle"><h3>部署时不跑仿真</h3><p>RL 策略是约 30 万参数的小网络，在 NUC CPU 上推理不到 1 ms。仿真只在离线训练、数据生成和验证时使用。</p></div>
+    <div class="principle"><h3>接触段必须闭环</h3><p>仿真轨迹只用于自由空间段。抓取和插入的最后几厘米由闭环 RL 或带力控的技能完成。</p></div>
+    <div class="principle"><h3>规划层选技能链</h3><p>规划层不在几个模型里挑一个，而是选整条技能链。这样 π0.5 和仿真不需要同时占用 5060 Ti 的显存。</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="tag">工作线</span><h2>五条主要工作</h2></div>
+
+  <div class="line">
+    <div class="k"><h3>仿真强化学习</h3><span class="status s-ok">主要成果</span></div>
+    <p>在 Isaac Lab 里用 PPO 训练一个策略，完成从伸手到放手的长方体完整任务。起始状态从预先生成的状态表里抽取，并加入 SGS（按各起点的成功率调整抽样权重，多练容易失败的情况）。训练时随机加入相机、机械臂状态和动作的延迟，以及位姿估计误差，让策略能适应真机条件。</p>
+    <div class="tbl"><table>
+      <thead><tr><th>模型</th><th>测试条件</th><th style="text-align:right">成功率</th></tr></thead>
+      <tbody>
+        <tr><td><code>model_8049</code>（10-24）</td><td>无延迟，2048 回合，未见过的起点</td><td class="r">94.5%</td></tr>
+        <tr><td><code>model_8049</code></td><td>抓到之后完成插入并放手</td><td class="r">98%</td></tr>
+        <tr><td><code>model_9548</code>（加延迟训练）</td><td>接近真机：相机 100 ms + 状态 33 ms + 动作 33 ms</td><td class="r">93.1%</td></tr>
+        <tr><td><code>model_9548</code></td><td>上一行再加位姿误差和每帧抖动</td><td class="r">90.2%</td></tr>
+        <tr><td>s29 <code>model_15550</code>（修正夹爪后，Juno）</td><td>标准评估集</td><td class="r hi">94.1%</td></tr>
+        <tr><td>s29 <code>model_15550</code></td><td>加延迟和噪声</td><td class="r hi">91.6%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted">10-27 发现仿真里的机器人模型把夹爪装偏了 90°，修正后从第 27 阶段起重新训练，所以 s29 是目前的有效结果。s29 已导出成部署格式，并和仿真里的输出逐项比对一致；观测、执行、安全检查和软件在环测试也已写好。完成时间的中位数约 8 秒。</p>
+  </div>
+
+  <div class="line">
+    <div class="k"><h3>感知与标定</h3><span class="status s-ok">基本完成</span></div>
+    <ul>
+      <li>三台相机的内外参和手眼都已标定（10-16 起，腕部 L515 在 10-28 翻转后重标）。</li>
+      <li>装配板位姿：腕部 L515 移到固定的观察位姿，识别 20 mm 的 AprilTag。留一法误差为 4.3 mm / 2.5°。</li>
+      <li>黑色 peg 吸光，RGB 和深度都很难定位，所以改成白色重新打印。11-01 的测试：D455 给粗位置，腕部俯视给精确朝向（yaw 误差 0.6°）。绝对精度还没验证。</li>
+    </ul>
+  </div>
+
+  <div class="line">
+    <div class="k"><h3>真实示教与 π0.5</h3><span class="status s-open">进行中</span></div>
+    <ul>
+      <li>用遥操作采了约 60 条长方体抓取加插入的真实轨迹（rect2 / rect3），在 bender 上做 LoRA 微调。</li>
+      <li>真机测试：背景和训练时相近，成功 7/10；拉开窗帘、背景变了，降到 2/6。</li>
+      <li>仿真数据生成器按 MimicGen 的思路，把真实示教改编成新的仿真轨迹。目前约有 150 条合成轨迹和 100 条 RL 轨迹，加入了背景和光照扰动，和真实数据混合训练出 <code>rect23_sim_warm_v1</code>。</li>
+      <li>数据一律保持采集时的速度，不做加速（11-01 确定）。</li>
+    </ul>
+  </div>
+
+  <div class="line">
+    <div class="k"><h3>执行稳定性</h3><span class="status s-ok">主要问题已解决</span></div>
+    <p>真机执行时一开始抖动明显，加上 RTC（实时分块）也没解决。最后查到原因是控制器限速，使实际执行延迟和代码里假设的延迟对不上。限速改成 100% 之后，动作变快，抖动消失。NUC CPU 占用高时偶尔还会抖，关掉相机画面显示后明显改善。端到端延迟实测约 <span class="num">334 ms</span>：预处理 68 ms，GPU 推理 218 ms，控制周期 35 ms。</p>
+  </div>
+
+  <div class="line">
+    <div class="k"><h3>实验室孪生与渲染</h3><span class="status s-open">部分完成</span></div>
+    <p>在仿真里搭了实验室的数字孪生，按实验室三台相机的视角渲染示教轨迹，用来缩小仿真和真实画面的差距（目前只渲染了接近阶段，外观差异还有清单待补）。另外准备了 10 个静态部署场景，用来测试背景变化的影响，比如旁边的桌子、另一台 UR5e、走动的人。</p>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="tag">时间线</span><h2>关键节点</h2></div>
+  <ol class="tl">
+    <li><time>10-06</time><span>第一次真机运动：看门狗停机、TCP 和负载标定、夹爪能夹住打印的 peg。</span></li>
+    <li><time>10-08</time><span>第二次真机日；写好分层计划：先用脚本技能跑通全流程，再逐个换成学习型技能。</span></li>
+    <li><time>10-12</time><span>六角零件示教的数据流式读取、切分和重定向。</span></li>
+    <li><time>10-15</time><span>制定 SGS 采样器方案，加入 RL 训练。</span></li>
+    <li><time>10-16</time><span>D455 / L515 / D405 标定完成。</span></li>
+    <li><time>10-22</time><span>规划层状态机方案；仿真发现交接条件主要取决于手臂关节构型。</span></li>
+    <li><time>10-24</time><span>长方体完整任务单策略达到 94.5%；次日抗延迟版本出炉。</span></li>
+    <li><time>10-27</time><span>修正仿真夹爪 90° 安装错误并重训；左侧 L515 装好并标定。</span></li>
+    <li><time>10-28</time><span>采集真实插入示教 rect2 / rect3；接入 Juno 集群。</span></li>
+    <li><time>10-29</time><span>修订执行框架（规划层、RL、VLA、分段合成）；s29 部署栈一致性检查通过。</span></li>
+    <li><time>10-30</time><span>装配板位姿方案 A 标定完成。</span></li>
+    <li><time>11-01</time><span>白色 peg 投入使用；π0.5 真机测试 7/10。</span></li>
+    <li><time>11-02</time><span>测量 GPU box 上的实时延迟；准备部署背景测试场景。</span></li>
+    <li><time>11-03</time><span>分析混合数据模型的抖动，以及仿真数据里抓取偏离中心的问题。</span></li>
+  </ol>
+</section>
+
+<section>
+  <div class="sh"><span class="tag">问题</span><h2>目前的主要问题</h2></div>
+  <div class="issues">
+    <div class="issue"><div><h3>混合数据训练的 π0.5 在接近阶段来回调整</h3><p>前后两段动作的预测互相矛盾，所以机械臂来回修正；控制器本身没问题。仿真 v4 数据的关节噪声大约是真实 rect3 的 3 倍。</p></div></div>
+    <div class="issue"><div><h3>仿真数据里有抓偏的轨迹</h3><p>部分轨迹合拢时没对准 peg 中心。仿真里的物理比较宽容，再加上手中对齐步骤，这些抓偏被弥补了，可真机做不到，导致模型抓取时会碰到 peg。下次训练前需要先把它们过滤掉。</p></div></div>
+    <div class="issue"><div><h3>对背景和光照敏感</h3><p>背景一变，成功率从 70% 降到约 30%。计划搭防护框架固定背景，并补充更多场景变化的数据。</p></div></div>
+    <div class="issue"><div><h3>抓取方式单一，力超限</h3><p>大多数示教抓的是宽面，窄面数据很少。插入和窄面抓取时会触发力超限导致停机，失败后的恢复也还不可靠。</p></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="tag">下一步</span><h2>接下来的计划</h2></div>
+  <ol class="next">
+    <li>过滤仿真数据里抓偏的轨迹，降低关节噪声，重新训练混合模型，先在仿真里评估再上真机。</li>
+    <li>实现规划层：识别零件形状和立/躺状态，自动选择对应的技能链或模型指令。</li>
+    <li>采集窄面抓取和其他形状零件的示教，丰富抓取方式。</li>
+    <li>在 GPU box（5060 Ti）上完成部署测试；搭好局域网和防护框架。</li>
+    <li>改进力感知的运动和失败恢复，在超限之前就避开。</li>
+    <li>时间允许时继续 RL 到真机：用 AprilTag 估计位姿，验证 s29 策略，再用它生成真实轨迹，代替遥操作采集。</li>
+  </ol>
+</section>
+
+<footer>依据 2026-10-08 至 11-03 的本地计划、总结和周报整理。代码和数据在 NUC 与 bender 上，本页只做说明，不是任务清单。</footer>
+
+</div>
+
+</body></html>
